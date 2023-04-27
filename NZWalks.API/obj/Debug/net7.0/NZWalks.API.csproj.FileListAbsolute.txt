@@ -150,3 +150,5 @@ C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\obj\Debug\net7.0\r
 C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\obj\Debug\net7.0\NZWalks.API.pdb
 C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\obj\Debug\net7.0\NZWalks.API.genruntimeconfig.cache
 C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\obj\Debug\net7.0\ref\NZWalks.API.dll
+C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\nera1\Desktop\.Net-Udemy\NZWalks\NZWalks\NZWalks.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
