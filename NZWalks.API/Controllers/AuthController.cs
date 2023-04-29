@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NZWalks.API.Models.DTOs;
@@ -46,6 +47,28 @@ namespace NZWalks.API.Controllers
             }
             return BadRequest("Something went wrong");
 
+        }
+
+        // POST: /api/Auth/Login
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDtos loginRequestDtos)
+        {
+            var user = await userManager.FindByEmailAsync(loginRequestDtos.Username);
+
+            if (user != null)
+            {
+                var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginRequestDtos.Password);
+
+                if(checkPasswordResult)
+                {
+                    // Create Token
+
+                    return Ok();
+                }
+            }
+
+            return BadRequest("Username or password is incorrect");
         }
     }
 }
