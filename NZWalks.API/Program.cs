@@ -15,8 +15,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// bd 1
 builder.Services.AddDbContext<NZWalksDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksConectionString")));
+
+// bd 2
+builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConectionString")));
 
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
