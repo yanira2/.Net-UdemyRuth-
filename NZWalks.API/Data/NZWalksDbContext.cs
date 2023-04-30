@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Models.Domain;
 
+
 namespace NZWalks.API.Data
 {
     public class NZWalksDbContext : DbContext
@@ -15,6 +16,8 @@ namespace NZWalks.API.Data
         public DbSet<Region> Regions { get; set; }
 
         public DbSet<Walk> Walks { get; set; }
+
+        public DbSet<Images> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,9 +98,6 @@ namespace NZWalks.API.Data
             modelBuilder.Entity<Region>().HasData(regions);
 
         }
-
-
-
 
     }
 }

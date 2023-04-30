@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata.Ecma335;
 
 namespace NZWalks.API.Models.Domain
 {
-    public class Image
+    public class Images
     {
         public Guid Id { get; set; }
 
@@ -14,5 +13,6 @@ namespace NZWalks.API.Models.Domain
         public string FileExtension { get; set; }
         public long FileSizeInBytes { get; set; }
         public string FilePath { get; set; }
+
     }
 }
