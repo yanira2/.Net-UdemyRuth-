@@ -12,8 +12,8 @@ using NZWalks.API.Data;
 namespace NZWalks.API.Migrations
 {
     [DbContext(typeof(NZWalksDbContext))]
-    [Migration("20230425233838_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20230501163411_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,23 @@ namespace NZWalks.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Difficulties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("76528293-abbd-4d23-a724-32a4eda6a02a"),
+                            Name = "Easy"
+                        },
+                        new
+                        {
+                            Id = new Guid("a5824ae2-6920-4b90-9487-294f9c01320a"),
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = new Guid("32edb915-2275-4100-a29e-586fac4f1033"),
+                            Name = "Hard"
+                        });
                 });
 
             modelBuilder.Entity("NZWalks.API.Models.Domain.Region", b =>
@@ -60,15 +77,54 @@ namespace NZWalks.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Regions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b9b2da8d-5e3d-4f7c-b5ce-8b9a924b5c72"),
+                            Code = "AKL",
+                            Name = "Auckland",
+                            RegionImageUrl = "https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        },
+                        new
+                        {
+                            Id = new Guid("932fa4ef-15da-4deb-9812-ce295b51e311"),
+                            Code = "NTL",
+                            Name = "Northland"
+                        },
+                        new
+                        {
+                            Id = new Guid("855890f5-f081-4f9b-a957-376d10f193c7"),
+                            Code = "BOP",
+                            Name = "Bay Of Plenty"
+                        },
+                        new
+                        {
+                            Id = new Guid("b388188e-c702-46fc-939d-01a21ce881d3"),
+                            Code = "WGN",
+                            Name = "Wellington",
+                            RegionImageUrl = "https://images.pexels.com/photos/4350631/pexels-photo-4350631.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        },
+                        new
+                        {
+                            Id = new Guid("030b2621-85c5-4ed6-b8f9-e345c341bb7a"),
+                            Code = "NSN",
+                            Name = "Nelson",
+                            RegionImageUrl = "https://images.pexels.com/photos/13918194/pexels-photo-13918194.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        },
+                        new
+                        {
+                            Id = new Guid("132babb6-406a-4e95-b862-217cb0892cb0"),
+                            Code = "STL",
+                            Name = "Southland"
+                        });
                 });
 
             modelBuilder.Entity("NZWalks.API.Models.Domain.Walk", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -77,8 +133,8 @@ namespace NZWalks.API.Migrations
                     b.Property<Guid>("DifficultyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("LengthInKm")
-                        .HasColumnType("float");
+                    b.Property<int>("LengthInKm")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
