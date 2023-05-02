@@ -49,7 +49,7 @@ namespace NZWalks.API.Controllers
                 isAscending ?? true, pageNumber, pageSize);
 
                 // Create an exception
-                throw new Exception("This is a new exception");
+               //----- throw new Exception("This is a new exception");
 
                 // Map Domain Model to DTO
                 return Ok(mapper.Map<List<WalkDto>>(walksDomainModel));    

@@ -16,7 +16,7 @@ namespace NZWalks.API.Controllers
     // https://localhost:portnumber/api/regions
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RegionsController : ControllerBase
     {
         private readonly NZWalksDbContext dbContext;
@@ -38,30 +38,26 @@ namespace NZWalks.API.Controllers
 
         // GET ALL REGIONS
         // GET: https://localhost:portnumber/api/regions
-        [HttpGet]
-       // [Authorize(Roles = "Reader")]
+       [HttpGet]
+       [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                throw new Exception("This is a custom exception");
+            
 
                 // GET Data From Database - Domain models 
                 var regionsDomain = await regionRepository.GetAllAsync();
-
-                // Return DTOs 
-
-                logger.LogInformation($"Finished GetAllRegions request with data: {JsonSerializer.Serialize(regionsDomain)}");
-
-
-                return Ok(mapper.Map<List<RegionDto>>(regionsDomain));
-
-            }
-            catch (Exception ex)
+            if (regionsDomain == null)
             {
-                logger.LogError(ex, ex.Message);
-                throw;
+                return NotFound();
             }
+            // Return DTOs 
+
+            //logger.LogInformation($"Finished GetAllRegions request with data: {JsonSerializer.Serialize(regionsDomain)}");
+
+
+            return Ok(mapper.Map<List<RegionDto>>(regionsDomain));
+
+
 
            
         }

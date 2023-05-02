@@ -10,21 +10,24 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using NZWalks.API.Middlewares;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var logger = new LoggerConfiguration()
+/*var logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File("Logs/NZWalks_Log.txt", rollingInterval: RollingInterval.Minute)
     .MinimumLevel.Warning()
-    .CreateLogger();
+    .CreateLogger();*/
 
 builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger);
+//builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -71,6 +74,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConec
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
@@ -122,6 +126,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+    RequestPath = "/Images"
+    // https://Localhost:1234/Images
+});
 
 
 app.MapControllers();
